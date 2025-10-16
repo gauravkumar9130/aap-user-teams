@@ -1,0 +1,29 @@
+teams:
+  - name: demo-team1
+    organization: Default
+    roles:
+      - name: Auditor Role
+        type: organization
+        role: auditor
+
+  - name: demo-team2
+    organization: Default
+
+users:
+  - username: demo-user1
+    first_name: Demo
+    last_name: UserOne
+    password: "redhat123"
+    team: demo-team1
+
+  - username: demo-user2
+    first_name: Demo
+    last_name: UserTwo
+    password: "redhat123"
+    team: demo-team2
+
+  - username: demo-user3
+    first_name: Demo
+    last_name: AdminUser
+    password: "redhat123"
+    is_superuser: true

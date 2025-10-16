@@ -1,0 +1,17 @@
+- name: Configure Automation Controller from structured files
+  hosts: all
+  become: true
+  
+  vars_files:
+    - vars/auth.yml # Load the encrypted controller credentials
+    - vars/main.yml            # Load the user/team variables
+
+  tasks:
+    - name: Creating Teams
+      include_tasks: tasks/create_teams.yml
+
+    - name: Creating Users
+      include_tasks: tasks/create_users.yml
+
+    - name: Assigning All Roles
+      include_tasks: tasks/create_roles.yml

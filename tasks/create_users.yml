@@ -1,0 +1,13 @@
+- name: Create the users in Automation Controller
+  ansible.controller.user:
+    controller_host: "{{ controller_host }}"
+    controller_username: "{{ controller_admin_user }}"
+    controller_password: "{{ controller_admin_password }}"
+    username: "{{ item.username }}"
+    first_name: "{{ item.first_name }}"
+    last_name: "{{ item.last_name }}"
+    password: "{{ item.password }}"
+    validate_certs: false
+    is_superuser: "{{ item.is_superuser | default(false) }}"
+    state: present
+  loop: "{{ users }}"

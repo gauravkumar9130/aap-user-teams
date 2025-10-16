@@ -1,0 +1,24 @@
+- name: Assign users to their team with the 'Member' role
+  ansible.controller.role:
+    controller_host: "{{ controller_host }}"
+    controller_username: "{{ controller_admin_user }}"
+    controller_password: "{{ controller_admin_password }}"
+    user: "{{ item.username }}"
+    team: "{{ item.team }}"
+    validate_certs: false
+    role: "member"
+    state: present
+  loop: "{{ users }}"
+  when: item.team is defined
+
+- name: Assign special roles to teams
+  ansible.controller.role:
+    controller_host: "{{ controller_host }}"
+    controller_username: "{{ controller_admin_user }}"
+    controller_password: "{{ controller_admin_password }}"
+    team: "{{ item.0.name }}"
+    validate_certs: false
+    role: "{{ item.1.role }}"
+    organization: "{{ item.0.organization }}"
+    state: present
+  loop: "{{ teams | subelements('roles', {'skip_missing': True}) }}"

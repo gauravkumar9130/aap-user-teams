@@ -1,0 +1,10 @@
+- name: Create the teams in Automation Controller
+  ansible.controller.team:
+    controller_host: "{{ controller_host }}"
+    controller_username: "{{ controller_admin_user }}"
+    controller_password: "{{ controller_admin_password }}"
+    name: "{{ item.name }}"
+    organization: "{{ item.organization }}"
+    validate_certs: false
+    state: present
+  loop: "{{ teams }}"
