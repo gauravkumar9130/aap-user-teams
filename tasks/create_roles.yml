@@ -3,7 +3,7 @@
     controller_host: "{{ controller_host }}"
     controller_username: "{{ controller_admin_user }}"
     controller_password: "{{ controller_admin_password }}"
-    validate_certs: "{{ controller_validate_certs }}"
+    validate_certs: false
     user: "{{ item.username }}"
     team: "{{ item.team }}"
     role: "member"
@@ -16,7 +16,7 @@
     controller_host: "{{ controller_host }}"
     controller_username: "{{ controller_admin_user }}"
     controller_password: "{{ controller_admin_password }}"
-    validate_certs: "{{ controller_validate_certs }}"
+    validate_certs: false
     team: "{{ item.name }}"
     role: "{{ item.roles[0].role }}"  # Get the role from the first item in the list
     organization: "{{ item.organization }}"
