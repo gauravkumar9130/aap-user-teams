@@ -3,9 +3,9 @@
     controller_host: "{{ controller_host }}"
     controller_username: "{{ controller_admin_user }}"
     controller_password: "{{ controller_admin_password }}"
+    validate_certs: "{{ controller_validate_certs }}"
     user: "{{ item.username }}"
     team: "{{ item.team }}"
-    validate_certs: false
     role: "member"
     state: present
   loop: "{{ users }}"
@@ -16,9 +16,10 @@
     controller_host: "{{ controller_host }}"
     controller_username: "{{ controller_admin_user }}"
     controller_password: "{{ controller_admin_password }}"
-    team: "{{ item.0.name }}"
-    validate_certs: false
-    role: "{{ item.1.role }}"
-    organization: "{{ item.0.organization }}"
+    validate_certs: "{{ controller_validate_certs }}"
+    team: "{{ item.name }}"
+    role: "{{ item.roles[0].role }}"  # Get the role from the first item in the list
+    organization: "{{ item.organization }}"
     state: present
-  loop: "{{ teams | subelements('roles', {'skip_missing': True}) }}"
+  loop: "{{ teams }}"
+  when: item.roles is defined  # Only run this task for teams that have a 'roles' list
